@@ -1,0 +1,14 @@
+/*
+  Valen Brasil Design System — ponto de entrada único.
+  Este arquivo não define nenhuma regra própria, apenas importa os tokens
+  na ordem correta (fontes e valores de cor/tipo/espaço primeiro, reset base
+  por último — o base.css consome essas variáveis).
+*/
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/radius.css";
+@import "tokens/shadows.css";
+@import "tokens/motion.css";
+@import "tokens/base.css";
