@@ -1,0 +1,47 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      # Só a main: o ambiente `github-pages`, criado quando o Pages é ativado
+      # com origem "GitHub Actions", aceita deploy apenas da branch padrão.
+      # Disparar a partir de outra branch é rejeitado antes de qualquer passo
+      # rodar, então não faz sentido escutar outras branches aqui.
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy por vez; não cancela um deploy em andamento pela metade.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+        with:
+          # Habilita o Pages via API caso ainda não esteja ligado no repositório.
+          enablement: true
+
+      - name: Empacotar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # O site é estático: index.html na raiz, tokens/, assets/ e os
+          # HTMLs autocontidos em ui_kits/.
+          path: .
+
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4

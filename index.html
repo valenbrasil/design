@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valen Brasil — Design System</title>
+<link rel="icon" href="assets/valen-icone.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .wrap{width:100%;max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)}
+  header{border-bottom:1px solid var(--border-subtle);background:var(--surface-page)}
+  header .wrap{height:72px;display:flex;align-items:center;justify-content:space-between}
+  header img{height:22px}
+  header a{font:var(--type-label)}
+  .hero{padding:var(--space-24) 0 var(--space-16)}
+  .eyebrow{font:var(--type-eyebrow);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);display:block;margin-bottom:var(--space-4)}
+  h1{font:var(--type-display);font-size:clamp(2.4rem,5vw,3.75rem);margin-bottom:var(--space-5)}
+  .lead{font:var(--type-body-lg);color:var(--text-muted);max-width:60ch}
+  section{padding-block:var(--space-16);border-top:1px solid var(--border-subtle)}
+  h2{font:var(--type-h2);margin-bottom:var(--space-3)}
+  .sub{font:var(--type-body);color:var(--text-muted);max-width:60ch;margin-bottom:var(--space-8)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-6)}
+  .card{display:block;border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:var(--space-6);background:var(--surface-card);box-shadow:var(--shadow-xs);text-decoration:none;color:inherit;transition:transform var(--duration-base) var(--ease-out),box-shadow var(--duration-base) var(--ease-out)}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);color:inherit}
+  .card h3{font:var(--type-h4);color:var(--text-strong);margin-bottom:var(--space-2)}
+  .card p{font:var(--type-body-sm);color:var(--text-muted);margin:0}
+  .card .go{display:inline-block;margin-top:var(--space-4);font:var(--type-label);color:var(--text-brand)}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--space-6)}
+  .stat{border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:var(--space-5);background:var(--surface-subtle)}
+  .stat .n{font:var(--type-h3);color:var(--text-strong);display:block}
+  .stat .l{font:var(--type-body-sm);color:var(--text-muted)}
+  .ramp{display:flex;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-subtle);margin-bottom:var(--space-4)}
+  .ramp div{flex:1;height:64px}
+  .note{background:var(--surface-contrast);border:1px solid var(--sage-200);border-radius:var(--radius-card);padding:var(--space-5);color:var(--sage-800);font:var(--type-body-sm);max-width:70ch}
+  footer{border-top:1px solid var(--border-subtle);background:var(--surface-subtle);padding:var(--space-12) 0;margin-top:var(--space-8)}
+  footer .wrap{display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;font:var(--type-body-sm);color:var(--text-muted)}
+  .mono{font:var(--type-mono);font-size:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="assets/valen-logo.png" alt="Valen Brasil">
+    <a href="https://github.com/valenbrasil/design">Repositório →</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <span class="eyebrow">Valen Brasil</span>
+    <h1>Design System</h1>
+    <p class="lead">Referência única de marca, fundamentos visuais, componentes e telas para os três produtos da Valen Brasil: o website institucional, o blog e o painel interno de gestão de laudos.</p>
+  </div>
+
+  <section>
+    <h2>Telas</h2>
+    <p class="sub">Protótipos navegáveis, montados com os componentes do sistema. Abrem direto no navegador, sem build.</p>
+    <div class="grid">
+      <a class="card" href="ui_kits/website/index.html">
+        <h3>Website institucional</h3>
+        <p>Hero, garantias, tipos de avaliação, processo, equipe, história, FAQ e chamada final.</p>
+        <span class="go">Abrir →</span>
+      </a>
+      <a class="card" href="ui_kits/blog/index.html">
+        <h3>Blog</h3>
+        <p>Feed com destaque, últimos artigos filtráveis, seções por tag e página de artigo.</p>
+        <span class="go">Abrir →</span>
+      </a>
+      <a class="card" href="ui_kits/dashboard/index.html">
+        <h3>Dashboard</h3>
+        <p>Visão geral, lista de laudos com filtros, detalhe do processo e agenda de vistorias.</p>
+        <span class="go">Abrir →</span>
+      </a>
+      <a class="card" href="ui_kits/dashboard/login.html">
+        <h3>Login do painel</h3>
+        <p>Tela de acesso do dashboard, com validação e estado de erro.</p>
+        <span class="go">Abrir →</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fundamentos</h2>
+    <p class="sub">Verde sage <code>#73945F</code> e cinza <code>#C8CBC6</code> foram extraídos do logo. Todo o resto deriva deles.</p>
+    <div class="ramp">
+      <div style="background:var(--sage-50)"></div>
+      <div style="background:var(--sage-100)"></div>
+      <div style="background:var(--sage-200)"></div>
+      <div style="background:var(--sage-300)"></div>
+      <div style="background:var(--sage-400)"></div>
+      <div style="background:var(--sage-500)"></div>
+      <div style="background:var(--sage-600)"></div>
+      <div style="background:var(--sage-700)"></div>
+      <div style="background:var(--sage-800)"></div>
+      <div style="background:var(--sage-900)"></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="n">169</span><span class="l">design tokens em CSS</span></div>
+      <div class="stat"><span class="n">29</span><span class="l">componentes primitivos</span></div>
+      <div class="stat"><span class="n">3</span><span class="l">produtos cobertos</span></div>
+      <div class="stat"><span class="n">Jost</span><span class="l">+ Manrope + JetBrains Mono</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Para desenvolvedores</h2>
+    <p class="sub">Base técnica Tailwind + shadcn/ui, ícones Lucide. O contrato de variáveis é canônico do shadcn — só os valores mudam.</p>
+    <div class="grid">
+      <a class="card" href="https://github.com/valenbrasil/design/blob/main/README.md">
+        <h3>Guia completo</h3>
+        <p>Marca, tom de voz, fundamentos, componentes e regras não negociáveis.</p>
+        <span class="go">Ler →</span>
+      </a>
+      <a class="card" href="https://github.com/valenbrasil/design/tree/main/handoff">
+        <h3>Handoff</h3>
+        <p><code>globals.css</code> e instruções para iniciar um projeto Next.js.</p>
+        <span class="go">Ver →</span>
+      </a>
+      <a class="card" href="https://github.com/valenbrasil/design/tree/main/components">
+        <h3>Componentes</h3>
+        <p>Cada primitiva com <code>.jsx</code>, contrato de props em <code>.d.ts</code> e spec em <code>.prompt.md</code>.</p>
+        <span class="go">Ver →</span>
+      </a>
+    </div>
+    <p class="note" style="margin-top:var(--space-8)"><strong>O sistema é exclusivamente claro.</strong> Não existe tema escuro nem seção de fundo escuro em nenhum produto. Para destacar, use o verde-claro <code>--surface-contrast</code> com texto <code>--sage-800</code>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div>Valen Brasil Gestão Empresarial Ltda</div>
+      <div class="mono">CNPJ 39.819.814/0001-98 · CAU PJ69468-1 · CRECI 11689-J</div>
+    </div>
+    <div>Itajaí · Santa Catarina</div>
+  </div>
+</footer>
+
+</body>
+</html>

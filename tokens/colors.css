@@ -1,0 +1,97 @@
+/*
+  Cores — Valen Brasil Design System
+  Fonte da verdade: template.html (guia do design system), bloco :root
+  Não altere valores aqui sem atualizar o guia de origem.
+*/
+:root {
+  /* --- Marca: verde sage extraído do logo (#73945F) --- */
+  --sage-50: #f4f7f1;
+  --sage-100: #e7ede2;
+  --sage-200: #cfdcc6;
+  --sage-300: #b2c6a4;
+  --sage-400: #93ae81;
+  --sage-500: #73945f;
+  --sage-600: #5e7c4c;
+  --sage-700: #4a633c;
+  --sage-800: #3a4e30;
+  --sage-900: #2c3a25;
+
+  /* --- Neutros: cinza levemente esverdeado (#C8CBC6 do logo = 300) --- */
+  --neutral-0: #ffffff;
+  --neutral-50: #fafaf9;
+  --neutral-100: #f3f4f2;
+  --neutral-200: #e6e8e4;
+  --neutral-300: #c8cbc6;
+  --neutral-400: #a6aaa4;
+  --neutral-500: #82867f;
+  --neutral-600: #61645e;
+  --neutral-700: #464843;
+  --neutral-800: #2b2d29;
+  --neutral-900: #141613;
+  --neutral-950: #0a0b09;
+
+  /* --- Semânticas --- */
+  --success-50: #eef7f0;
+  --success-500: #3f8b57;
+  --success-700: #2c6640;
+  --warning-50: #fbf4e8;
+  --warning-500: #b5822b;
+  --warning-700: #8a611c;
+  --danger-50: #fbeeed;
+  --danger-500: #b3453c;
+  --danger-700: #8a332c;
+  --info-50: #eef2f7;
+  --info-500: #4a6b8a;
+  --info-700: #35506b;
+
+  /* --- Contrato shadcn/Tailwind (nomes canônicos do preset) --- */
+  --background: var(--neutral-0);
+  --foreground: var(--neutral-900);
+  --card: var(--neutral-0);
+  --card-foreground: var(--neutral-900);
+  --popover: var(--neutral-0);
+  --popover-foreground: var(--neutral-900);
+  --primary: var(--sage-500);
+  --primary-foreground: #ffffff;
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--neutral-900);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--neutral-500);
+  --accent: var(--sage-50);
+  --accent-foreground: var(--sage-700);
+  --destructive: var(--danger-500);
+  --destructive-foreground: #ffffff;
+  --border: var(--neutral-200);
+  --input: var(--neutral-300);
+  --ring: var(--sage-500);
+  --chart-1: var(--sage-500);
+  --chart-2: var(--sage-300);
+  --chart-3: var(--neutral-700);
+  --chart-4: var(--sage-700);
+  --chart-5: var(--neutral-400);
+  --sidebar: var(--neutral-50);
+  --sidebar-foreground: var(--neutral-700);
+  --sidebar-primary: var(--sage-500);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--sage-50);
+  --sidebar-accent-foreground: var(--sage-700);
+  --sidebar-border: var(--neutral-200);
+  --sidebar-ring: var(--sage-500);
+
+  /* --- Aliases de leitura --- */
+  --text-strong: var(--neutral-900);
+  --text-body: var(--neutral-700);
+  --text-muted: var(--neutral-500);
+  --text-on-brand: #ffffff;
+  --text-brand: var(--sage-600);
+  --surface-page: var(--neutral-0);
+  --surface-subtle: var(--neutral-50);
+  --surface-card: var(--neutral-0);
+  --surface-contrast: var(--sage-50);
+  --surface-brand: var(--sage-500);
+  --surface-brand-subtle: var(--sage-50);
+  --border-subtle: var(--neutral-200);
+  --border-strong: var(--neutral-300);
+  --border-brand: var(--sage-500);
+  --overlay: rgba(20, 22, 19, .55);
+}

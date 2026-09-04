@@ -1,0 +1,16 @@
+/*
+  Raios — Valen Brasil Design System
+  Fonte da verdade: template.html.
+*/
+:root {
+  --radius: 0.5rem;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: 1.25rem;
+  --radius-full: 9999px;
+  --radius-card: 0.75rem;
+  --radius-control: 0.5rem;
+  --radius-pill: 9999px;
+}

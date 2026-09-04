@@ -1,0 +1,197 @@
+/*
+  globals.css — Valen Brasil Design System
+  Substitua o app/globals.css gerado pelo `shadcn init` por este arquivo.
+  Mantém o contrato de variáveis do shadcn/Tailwind (mesmos nomes que o CLI
+  gera) e troca apenas os valores pelos da marca, extraídos de template.html.
+
+  Depois de colar este arquivo:
+    1. rode `pnpm add lucide-react` (ícones)
+    2. copie tokens/ e components/ deste repositório para o projeto Next
+    3. importe as fontes (ver bloco @import abaixo, igual a tokens/fonts.css)
+
+  Regra número 1 do sistema: SOMENTE modo claro. Não existe bloco `.dark`
+  aqui de propósito — não crie um.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200..700&family=Manrope:wght@400..800&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --- Marca: verde sage extraído do logo (#73945F) --- */
+    --sage-50: #f4f7f1;
+    --sage-100: #e7ede2;
+    --sage-200: #cfdcc6;
+    --sage-300: #b2c6a4;
+    --sage-400: #93ae81;
+    --sage-500: #73945f;
+    --sage-600: #5e7c4c;
+    --sage-700: #4a633c;
+    --sage-800: #3a4e30;
+    --sage-900: #2c3a25;
+
+    /* --- Neutros: cinza levemente esverdeado (#C8CBC6 do logo = 300) --- */
+    --neutral-0: #ffffff;
+    --neutral-50: #fafaf9;
+    --neutral-100: #f3f4f2;
+    --neutral-200: #e6e8e4;
+    --neutral-300: #c8cbc6;
+    --neutral-400: #a6aaa4;
+    --neutral-500: #82867f;
+    --neutral-600: #61645e;
+    --neutral-700: #464843;
+    --neutral-800: #2b2d29;
+    --neutral-900: #141613;
+    --neutral-950: #0a0b09;
+
+    /* --- Semânticas --- */
+    --success-50: #eef7f0;
+    --success-500: #3f8b57;
+    --success-700: #2c6640;
+    --warning-50: #fbf4e8;
+    --warning-500: #b5822b;
+    --warning-700: #8a611c;
+    --danger-50: #fbeeed;
+    --danger-500: #b3453c;
+    --danger-700: #8a332c;
+    --info-50: #eef2f7;
+    --info-500: #4a6b8a;
+    --info-700: #35506b;
+
+    /* --- Contrato canônico shadcn/Tailwind --- */
+    --background: var(--neutral-0);
+    --foreground: var(--neutral-900);
+    --card: var(--neutral-0);
+    --card-foreground: var(--neutral-900);
+    --popover: var(--neutral-0);
+    --popover-foreground: var(--neutral-900);
+    --primary: var(--sage-500);
+    --primary-foreground: #ffffff;
+    --secondary: var(--neutral-100);
+    --secondary-foreground: var(--neutral-900);
+    --muted: var(--neutral-100);
+    --muted-foreground: var(--neutral-500);
+    --accent: var(--sage-50);
+    --accent-foreground: var(--sage-700);
+    --destructive: var(--danger-500);
+    --destructive-foreground: #ffffff;
+    --border: var(--neutral-200);
+    --input: var(--neutral-300);
+    --ring: var(--sage-500);
+    --chart-1: var(--sage-500);
+    --chart-2: var(--sage-300);
+    --chart-3: var(--neutral-700);
+    --chart-4: var(--sage-700);
+    --chart-5: var(--neutral-400);
+    --sidebar: var(--neutral-50);
+    --sidebar-foreground: var(--neutral-700);
+    --sidebar-primary: var(--sage-500);
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: var(--sage-50);
+    --sidebar-accent-foreground: var(--sage-700);
+    --sidebar-border: var(--neutral-200);
+    --sidebar-ring: var(--sage-500);
+
+    /* --- Aliases de leitura (não fazem parte do contrato shadcn, mas são
+       usados pelos componentes deste design system) --- */
+    --text-strong: var(--neutral-900);
+    --text-body: var(--neutral-700);
+    --text-muted: var(--neutral-500);
+    --text-on-brand: #ffffff;
+    --text-brand: var(--sage-600);
+    --surface-page: var(--neutral-0);
+    --surface-subtle: var(--neutral-50);
+    --surface-card: var(--neutral-0);
+    --surface-contrast: var(--sage-50);
+    --surface-brand: var(--sage-500);
+    --surface-brand-subtle: var(--sage-50);
+    --border-subtle: var(--neutral-200);
+    --border-strong: var(--neutral-300);
+    --border-brand: var(--sage-500);
+    --overlay: rgba(20, 22, 19, .55);
+
+    /* --- Tipografia --- */
+    --font-display: "Jost", "Helvetica Neue", Arial, sans-serif;
+    --font-sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+    /* --- Forma --- */
+    --radius: 0.5rem;
+    --radius-sm: calc(var(--radius) - 2px);
+    --radius-md: var(--radius);
+    --radius-lg: calc(var(--radius) + 4px);
+    --radius-xl: calc(var(--radius) + 8px);
+    --radius-2xl: 1.25rem;
+    --radius-full: 9999px;
+    --radius-card: 0.75rem;
+    --radius-control: 0.5rem;
+    --radius-pill: 9999px;
+  }
+
+  /*
+    Sem bloco `.dark`. O sistema é exclusivamente claro — não crie
+    `.dark`, não use neutral-900 como fundo de seção. Para destacar,
+    use bg-sage-50 com texto text-sage-800.
+  */
+
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background: var(--surface-page);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+  }
+}
+
+/*
+  @theme inline — mapeamento opcional para Tailwind v4 (utilitários como
+  bg-primary, text-foreground, rounded-card passam a funcionar direto).
+  Em Tailwind v3 com tailwind.config, mapeie as mesmas variáveis em
+  theme.extend.colors / theme.extend.borderRadius em vez deste bloco.
+*/
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}

@@ -1,0 +1,15 @@
+/*
+  Fontes — Valen Brasil Design System
+
+  Os arquivos originais do site (Framer) para Jost, Manrope e JetBrains Mono
+  não foram fornecidos — ver "Pendências conhecidas" no readme.md. Esta é uma
+  substituição aproximada via Google Fonts, cobrindo os mesmos pesos usados
+  pelos papéis tipográficos em tokens/typography.css:
+    - Jost: 200–700 (variável), usada em --type-display/h1/h2/h3
+    - Manrope: 400–800 (variável), usada em --type-h4/body/label/eyebrow
+    - JetBrains Mono: 400 e 500, usada em --type-mono
+
+  Quando os WOFF2 reais estiverem disponíveis, troque este @import por
+  @font-face apontando para os arquivos locais — nenhum outro token muda.
+*/
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200..700&family=Manrope:wght@400..800&family=JetBrains+Mono:wght@400;500&display=swap");
