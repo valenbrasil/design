@@ -31,7 +31,7 @@ ui_kits/                website, blog, dashboard (+ login) — HTMLs interativos
   website/              HomeHero.jsx, HomeSections.jsx, SiteChrome.jsx, index.html
   blog/                 BlogChrome.jsx, BlogFeed.jsx, PostView.jsx, index.html
   dashboard/            DashShell.jsx, DashOverview.jsx, DashLaudos.jsx, DashNova.jsx, Login.jsx, index.html, login.html
-assets/                 logo-valen-brasil.png, selo-valen-brasil.png
+assets/                 valen-logo.png, valen-icone.png
 handoff/                README.md e globals.css prontos para o projeto Next
 ```
 
@@ -51,8 +51,8 @@ Tabela de referência rápida ("onde está cada coisa"):
 ### Logo e uso
 
 Dois arquivos, nunca redesenhados: o lettering completo
-(`assets/logo-valen-brasil.png`) e o selo circular
-(`assets/selo-valen-brasil.png`).
+(`assets/valen-logo.png`) e o selo circular
+(`assets/valen-icone.png`).
 
 Regras:
 

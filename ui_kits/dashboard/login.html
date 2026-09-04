@@ -16,7 +16,7 @@
   1. Os dois <img> que usavam o componente Logo (que aponta por padrão para
      assets/valen-logo.png e assets/valen-icone.png) foram trocados por tags
      <img> apontando para os arquivos reais deste repositório,
-     assets/logo-valen-brasil.png e assets/selo-valen-brasil.png — os nomes
+     assets/valen-logo.png e assets/valen-icone.png — os nomes
      não batem entre o componente genérico e os arquivos de marca entregues.
   2. Fora isso, marcação, textos e comportamento (validação de e-mail,
      redirecionamento para index.html) são os mesmos do componente fonte em
@@ -270,7 +270,7 @@ function LoginScreen() {
   return (
     <div style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", background: "var(--surface-page)" }}>
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "var(--space-10) var(--space-12)" }}>
-        <img src="../../assets/logo-valen-brasil.png" alt="Valen Brasil" style={{ height: 20, width: "auto", display: "block" }} />
+        <img src="../../assets/valen-logo.png" alt="Valen Brasil" style={{ height: 20, width: "auto", display: "block" }} />
         <form onSubmit={entrar} style={{ width: "100%", maxWidth: 380, margin: "0 auto", display: "grid", gap: "var(--space-5)" }}>
           <div style={{ display: "grid", gap: "var(--space-2)" }}>
             <h1 style={{ font: "var(--type-h2)", fontSize: "2rem" }}>Acessar o painel</h1>
@@ -330,7 +330,7 @@ function LoginScreen() {
             </div>
           ))}
         </div>
-        <img src="../../assets/selo-valen-brasil.png" alt="" style={{ width: 56, opacity: 0.8 }} />
+        <img src="../../assets/valen-icone.png" alt="" style={{ width: 56, opacity: 0.8 }} />
       </aside>
     </div>
   );

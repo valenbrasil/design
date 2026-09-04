@@ -55,10 +55,11 @@ Copie as pastas `tokens/` e `components/` deste repositório para o projeto:
 
 ## 5. Assets de marca
 
-Copie `assets/logo-valen-brasil.png` e `assets/selo-valen-brasil.png`. O
-componente `Logo` (`components/core/Logo.jsx`) espera por padrão os nomes
-`assets/valen-logo.png` e `assets/valen-icone.png` — ajuste o componente ou
-renomeie os arquivos ao integrar, para os dois lados baterem.
+Copie `assets/valen-logo.png` (lettering completo) e `assets/valen-icone.png`
+(selo circular) preservando os nomes — são exatamente os que o componente
+`Logo` (`components/core/Logo.jsx`) usa por padrão. Se a pasta `assets/` ficar
+em outro caminho no projeto, passe o prefixo pela prop `base` em vez de
+renomear os arquivos.
 
 ## Regras não negociáveis
 
