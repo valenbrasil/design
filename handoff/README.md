@@ -33,11 +33,19 @@ pnpm add lucide-react
 Os componentes deste pacote usam um componente `Icon` que resolve ícones do
 Lucide por nome (ex. `name="arrow-right"`). Na versão de referência
 (`components/core/Icon.jsx`), isso é feito via `mask-image` apontando para
-`unpkg.com/lucide-static` — funciona para visualizar os kits em `ui_kits/`,
-mas depende de rede em tempo de execução. Num projeto Next.js real, troque a
-implementação de `Icon` para renderizar o componente correspondente de
-`lucide-react` (import dinâmico por nome, ou um mapa `{ "arrow-right":
+`assets/icons/`, que acompanha o repositório — são os 46 ícones efetivamente
+usados pelo sistema, extraídos do `lucide-static@0.428.0`. Nenhuma requisição
+de rede em tempo de execução. Páginas fora da raiz definem
+`window.__VALEN_ICON_BASE` antes de carregar o bundle para corrigir o caminho
+relativo.
+
+Num projeto Next.js real, troque a implementação de `Icon` para renderizar o
+componente correspondente de `lucide-react` (um mapa `{ "arrow-right":
 ArrowRight, ... }`), mantendo a mesma prop `name`.
+
+Atenção a um nome: `file-signature` foi renomeado para `file-pen-line` no
+Lucide. O repositório entrega os dois arquivos, mas em código novo use
+`file-pen-line`.
 
 ## 4. Copiar tokens e componentes
 
