@@ -1,5 +1,5 @@
 import * as React from "react";
-const BASE = "https://unpkg.com/lucide-static@0.428.0/icons/";
+const BASE = "assets/icons/";
 function Icon({ name, size = 20, style, className }) {
   const url = BASE + name + ".svg";
   return (

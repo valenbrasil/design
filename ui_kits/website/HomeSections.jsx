@@ -112,7 +112,7 @@ function Applications() {
     ],
     ["scroll-text", "Inventário", "Apure o valor dos imóveis para heranças e partilhas."],
     [
-      "file-signature",
+      "file-pen-line",
       "Reajuste de Aluguel",
       "Renegocie corretamente na renovação do contrato de locação",
     ],

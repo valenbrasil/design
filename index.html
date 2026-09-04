@@ -1,143 +1,322 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Valen Brasil — Design System</title>
-<link rel="icon" href="assets/valen-icone.png">
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Valen Brasil — Guia do Design System</title>
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/valen-icone.png">
+<script src="guia/react.min.js"></script>
+<script src="guia/react-dom.min.js"></script>
+<script src="guia/ds-bundle.js"></script>
 <style>
-  .wrap{width:100%;max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)}
-  header{border-bottom:1px solid var(--border-subtle);background:var(--surface-page)}
-  header .wrap{height:72px;display:flex;align-items:center;justify-content:space-between}
-  header img{height:22px}
-  header a{font:var(--type-label)}
-  .hero{padding:var(--space-24) 0 var(--space-16)}
-  .eyebrow{font:var(--type-eyebrow);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);display:block;margin-bottom:var(--space-4)}
-  h1{font:var(--type-display);font-size:clamp(2.4rem,5vw,3.75rem);margin-bottom:var(--space-5)}
-  .lead{font:var(--type-body-lg);color:var(--text-muted);max-width:60ch}
-  section{padding-block:var(--space-16);border-top:1px solid var(--border-subtle)}
-  h2{font:var(--type-h2);margin-bottom:var(--space-3)}
-  .sub{font:var(--type-body);color:var(--text-muted);max-width:60ch;margin-bottom:var(--space-8)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-6)}
-  .card{display:block;border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:var(--space-6);background:var(--surface-card);box-shadow:var(--shadow-xs);text-decoration:none;color:inherit;transition:transform var(--duration-base) var(--ease-out),box-shadow var(--duration-base) var(--ease-out)}
-  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);color:inherit}
-  .card h3{font:var(--type-h4);color:var(--text-strong);margin-bottom:var(--space-2)}
-  .card p{font:var(--type-body-sm);color:var(--text-muted);margin:0}
-  .card .go{display:inline-block;margin-top:var(--space-4);font:var(--type-label);color:var(--text-brand)}
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--space-6)}
-  .stat{border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:var(--space-5);background:var(--surface-subtle)}
-  .stat .n{font:var(--type-h3);color:var(--text-strong);display:block}
-  .stat .l{font:var(--type-body-sm);color:var(--text-muted)}
-  .ramp{display:flex;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-subtle);margin-bottom:var(--space-4)}
-  .ramp div{flex:1;height:64px}
-  .note{background:var(--surface-contrast);border:1px solid var(--sage-200);border-radius:var(--radius-card);padding:var(--space-5);color:var(--sage-800);font:var(--type-body-sm);max-width:70ch}
-  footer{border-top:1px solid var(--border-subtle);background:var(--surface-subtle);padding:var(--space-12) 0;margin-top:var(--space-8)}
-  footer .wrap{display:flex;justify-content:space-between;gap:var(--space-6);flex-wrap:wrap;font:var(--type-body-sm);color:var(--text-muted)}
-  .mono{font:var(--type-mono);font-size:12px}
-</style>
-</head>
-<body>
+body{background:var(--surface-page)}
+.shell{display:grid;grid-template-columns:248px 1fr;align-items:start}
+.toc{position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid var(--border-subtle);background:var(--surface-subtle);padding:var(--space-8) var(--space-5);display:grid;gap:var(--space-6);align-content:start}
+.toc nav{display:grid;gap:2px}
+.toc a{font:var(--type-body-sm);color:var(--text-body);padding:6px 10px;border-radius:var(--radius-sm);text-decoration:none}
+.toc a:hover{background:var(--neutral-200);color:var(--text-strong)}
+.toc h5{font:var(--type-eyebrow);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);margin:var(--space-3) 0 4px;padding:0 10px}
+main{max-width:1000px;padding:var(--space-16) var(--space-12) var(--space-24)}
+section{padding-block:var(--space-16);border-top:1px solid var(--border-subtle)}
+section:first-of-type{border-top:none;padding-top:0}
+h2{font:var(--type-h2);margin-bottom:var(--space-3)}
+h3{font:var(--type-h4);margin:var(--space-10) 0 var(--space-4)}
+.lead{font:var(--type-body-lg);color:var(--text-muted);max-width:64ch;margin-bottom:var(--space-8)}
+p{max-width:70ch;margin-bottom:var(--space-4)}
+.eyebrow{font:var(--type-eyebrow);text-transform:uppercase;letter-spacing:var(--tracking-widest);color:var(--text-muted);display:block;margin-bottom:var(--space-3)}
+.k{font:var(--type-mono);font-size:11px;color:var(--text-muted)}
+.ramp{display:flex;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-subtle)}
+.ramp div{flex:1;height:72px;display:flex;align-items:flex-end;padding:6px;font:var(--type-mono);font-size:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-6)}
+.tile{border:1px solid var(--border-subtle);border-radius:var(--radius-card);padding:var(--space-5)}
+table.spec{width:100%;border-collapse:collapse;font:var(--type-body-sm)}
+table.spec th{text-align:left;font:var(--type-eyebrow);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);padding:10px 12px;background:var(--surface-subtle);border-bottom:1px solid var(--border-subtle)}
+table.spec td{padding:10px 12px;border-bottom:1px solid var(--border-subtle);vertical-align:top}
+table.spec tr:last-child td{border-bottom:none}
+.wrapt{border:1px solid var(--border-subtle);border-radius:var(--radius-card);overflow:hidden}
+.frame{border:1px solid var(--border-subtle);border-radius:var(--radius-card);overflow:hidden;background:var(--surface-card);height:420px;position:relative}
+.frame iframe{border:0;position:absolute;top:0;left:0;transform-origin:top left}
+.rule{display:flex;gap:var(--space-3);padding:var(--space-4) 0;border-bottom:1px solid var(--border-subtle)}
+.rule:last-child{border-bottom:none}
+.num{font:var(--type-mono);color:var(--sage-600);flex-shrink:0}
+.do{border-left:0;background:var(--success-50);color:var(--success-700)}
+.dont{background:var(--danger-50);color:var(--danger-700)}
+.pill{display:inline-block;padding:4px 10px;border-radius:var(--radius-pill);font:var(--type-eyebrow);text-transform:uppercase;letter-spacing:.08em}
+code{font:var(--type-mono);font-size:12px;background:var(--surface-subtle);padding:2px 6px;border-radius:4px;color:var(--text-strong)}
+pre{background:var(--surface-subtle);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:var(--space-4);overflow:auto;font:var(--type-mono);font-size:12px;color:var(--text-strong)}
+</style></head><body>
+<div class="shell">
+<aside class="toc">
+<img src="assets/valen-logo.png" alt="Valen Brasil" style="width:150px;margin:0 10px">
+<nav>
+<h5>Marca</h5>
+<a href="#sobre">Sobre o sistema</a><a href="#logo">Logo e uso</a><a href="#conteudo">Conteúdo e tom</a>
+<h5>Fundamentos</h5>
+<a href="#cores">Cores</a><a href="#tipografia">Tipografia</a><a href="#espaco">Espaçamento e grid</a><a href="#forma">Forma, sombra e movimento</a><a href="#icones">Iconografia</a>
+<h5>Componentes</h5>
+<a href="#c-core">Core</a><a href="#c-forms">Formulários</a><a href="#c-feedback">Feedback</a><a href="#c-nav">Navegação</a><a href="#c-data">Dados</a>
+<h5>Produtos</h5>
+<a href="#tela-site">Website</a><a href="#tela-blog">Blog</a><a href="#tela-dash">Dashboard</a>
+<h5>Implementação</h5>
+<a href="#dev">Handoff para devs</a><a href="#pendencias">Pendências</a>
+</nav>
+</aside>
+<main>
 
-<header>
-  <div class="wrap">
-    <img src="assets/valen-logo.png" alt="Valen Brasil">
-    <a href="https://github.com/valenbrasil/design">Repositório →</a>
-  </div>
-</header>
+<section id="sobre">
+<span class="eyebrow">Valen Brasil</span>
+<h1 style="font:var(--type-display);font-size:3.25rem;margin-bottom:var(--space-5)">Guia do Design System</h1>
+<p class="lead">Referência única de marca, fundamentos visuais, componentes e telas para os três produtos da Valen Brasil: o website institucional, o blog e o painel interno de gestão de laudos.</p>
+<div class="grid3">
+<div class="tile"><span class="eyebrow">Empresa</span><p style="font:var(--type-body-sm);margin:0">Valen Brasil Gestão Empresarial Ltda. Avaliação imobiliária em Itajaí, Santa Catarina, desde 2020. Equipe de arquitetos, engenheiros e corretores.</p></div>
+<div class="tile"><span class="eyebrow">Base técnica</span><p style="font:var(--type-body-sm);margin:0">Tailwind + shadcn/ui. Contrato canônico de variáveis, escala de espaçamento Tailwind, ícones Lucide.</p></div>
+<div class="tile"><span class="eyebrow">Regra número 1</span><p style="font:var(--type-body-sm);margin:0">O sistema é <strong>exclusivamente claro</strong>. Não existe tema escuro nem seção de fundo escuro em nenhum produto.</p></div>
+</div>
+</section>
 
-<main class="wrap">
+<section id="logo">
+<span class="eyebrow">Marca</span><h2>Logo e uso</h2>
+<p class="lead">Dois arquivos, nunca redesenhados: o lettering completo e o selo circular.</p>
+<div class="grid2">
+<div class="tile" style="display:grid;place-items:center;min-height:150px"><img src="assets/valen-logo.png" alt="Logo Valen Brasil" style="width:78%"></div>
+<div class="tile" style="display:grid;place-items:center;min-height:150px"><img src="assets/valen-icone.png" alt="Selo Valen Brasil" style="height:96px"></div>
+</div>
+<h3>Sobre quais fundos</h3>
+<div class="grid3">
+<div class="tile" style="display:grid;place-items:center;height:110px;background:var(--surface-page)"><img src="assets/valen-logo.png" alt="" style="height:20px"></div>
+<div class="tile" style="display:grid;place-items:center;height:110px;background:var(--surface-subtle)"><img src="assets/valen-logo.png" alt="" style="height:20px"></div>
+<div class="tile" style="display:grid;place-items:center;height:110px;background:var(--sage-50);border-color:var(--sage-200)"><img src="assets/valen-logo.png" alt="" style="height:20px"></div>
+</div>
+<h3>Regras</h3>
+<div>
+<div class="rule"><span class="num">01</span><p style="margin:0">Nunca redesenhe, recrie em SVG/CSS, nem aproxime o lettering com outra fonte. Use sempre o arquivo de <code>assets/</code>.</p></div>
+<div class="rule"><span class="num">02</span><p style="margin:0">Nunca aplique fundo colorido atrás do lettering, nem recorte o respiro interno da marca.</p></div>
+<div class="rule"><span class="num">03</span><p style="margin:0">Tamanho mínimo do selo: 16px. Abaixo disso as três barras deixam de ser legíveis.</p></div>
+<div class="rule"><span class="num">04</span><p style="margin:0">Não gire, não distorça a proporção, não troque o verde por outra cor.</p></div>
+</div>
+</section>
 
-  <div class="hero">
-    <span class="eyebrow">Valen Brasil</span>
-    <h1>Design System</h1>
-    <p class="lead">Referência única de marca, fundamentos visuais, componentes e telas para os três produtos da Valen Brasil: o website institucional, o blog e o painel interno de gestão de laudos.</p>
-  </div>
+<section id="conteudo">
+<span class="eyebrow">Marca</span><h2>Conteúdo e tom</h2>
+<p class="lead">Português do Brasil. Técnico, sóbrio e tranquilizador — vende segurança e responsabilidade técnica, nunca urgência.</p>
+<div class="grid2">
+<div class="tile"><span class="pill do">Escreva assim</span>
+<ul style="font:var(--type-body-sm);margin:12px 0 0;padding-left:18px;display:grid;gap:8px">
+<li>“Contamos com uma equipe multidisciplinar.” — a empresa fala em <strong>nós</strong>.</li>
+<li>“Descubra o valor do seu imóvel.” — o cliente é <strong>você</strong>.</li>
+<li>“Entrega em 3 dias úteis.” — prazos e preços concretos.</li>
+<li>“Laudo de Avaliação Completo”, “NBR 14653”, “RRT/ART” — termos técnicos com maiúscula.</li>
+<li>CTA no imperativo curto: “Solicite sua avaliação”.</li>
+</ul></div>
+<div class="tile"><span class="pill dont">Não escreva assim</span>
+<ul style="font:var(--type-body-sm);margin:12px 0 0;padding-left:18px;display:grid;gap:8px">
+<li>Nada de “eu” — a marca nunca fala na primeira pessoa do singular.</li>
+<li>Nada de urgência artificial: “imperdível”, “últimas vagas”, contagem regressiva.</li>
+<li>Nada de exclamação em copy de produto.</li>
+<li>Nada de emoji, em nenhum produto.</li>
+<li>Nada de promessa sem número: “rápido”, “o melhor preço”.</li>
+</ul></div>
+</div>
+<h3>Estrutura padrão de seção</h3>
+<div class="tile" style="background:var(--surface-subtle)">
+<span class="eyebrow">Aplicação</span>
+<div style="font:var(--type-h3)">Avaliação de Imóveis</div>
+<div style="font:var(--type-body-lg);color:var(--text-muted);margin-top:6px">aplicável em diferentes contextos</div>
+<p class="k" style="margin:16px 0 0">eyebrow de uma palavra em caixa alta → título curto em capitalização de frase → subtítulo em minúsculas que continua a frase</p>
+</div>
+</section>
 
-  <section>
-    <h2>Telas</h2>
-    <p class="sub">Protótipos navegáveis, montados com os componentes do sistema. Abrem direto no navegador, sem build.</p>
-    <div class="grid">
-      <a class="card" href="ui_kits/website/index.html">
-        <h3>Website institucional</h3>
-        <p>Hero, garantias, tipos de avaliação, processo, equipe, história, FAQ e chamada final.</p>
-        <span class="go">Abrir →</span>
-      </a>
-      <a class="card" href="ui_kits/blog/index.html">
-        <h3>Blog</h3>
-        <p>Feed com destaque, últimos artigos filtráveis, seções por tag e página de artigo.</p>
-        <span class="go">Abrir →</span>
-      </a>
-      <a class="card" href="ui_kits/dashboard/index.html">
-        <h3>Dashboard</h3>
-        <p>Visão geral, lista de laudos com filtros, detalhe do processo e agenda de vistorias.</p>
-        <span class="go">Abrir →</span>
-      </a>
-      <a class="card" href="ui_kits/dashboard/login.html">
-        <h3>Login do painel</h3>
-        <p>Tela de acesso do dashboard, com validação e estado de erro.</p>
-        <span class="go">Abrir →</span>
-      </a>
-    </div>
-  </section>
+<section id="cores">
+<span class="eyebrow">Fundamentos</span><h2>Cores</h2>
+<p class="lead">Verde sage <code>#73945F</code> e cinza <code>#C8CBC6</code> foram extraídos pixel a pixel do logo. Todo o resto deriva deles.</p>
+<h3>Verde sage — a cor da marca</h3>
+<div class="ramp">
+<div style="background:var(--sage-50);color:var(--sage-800)">50</div><div style="background:var(--sage-100);color:var(--sage-800)">100</div><div style="background:var(--sage-200);color:var(--sage-800)">200</div><div style="background:var(--sage-300);color:var(--sage-800)">300</div><div style="background:var(--sage-400);color:var(--sage-800)">400</div><div style="background:var(--sage-500);color:#fff">500</div><div style="background:var(--sage-600);color:#fff">600</div><div style="background:var(--sage-700);color:#fff">700</div><div style="background:var(--sage-800);color:#fff">800</div><div style="background:var(--sage-900);color:#fff">900</div>
+</div>
+<p class="k" style="margin-top:10px"><code>--primary</code> = 500 · hover = 600 · texto verde = 700 · fundo de destaque = 50</p>
+<h3>Neutros</h3>
+<div class="ramp">
+<div style="background:var(--neutral-0);color:var(--neutral-800)">0</div><div style="background:var(--neutral-50);color:var(--neutral-800)">50</div><div style="background:var(--neutral-100);color:var(--neutral-800)">100</div><div style="background:var(--neutral-200);color:var(--neutral-800)">200</div><div style="background:var(--neutral-300);color:var(--neutral-800)">300</div><div style="background:var(--neutral-400);color:var(--neutral-800)">400</div><div style="background:var(--neutral-500);color:#fff">500</div><div style="background:var(--neutral-600);color:#fff">600</div><div style="background:var(--neutral-700);color:#fff">700</div><div style="background:var(--neutral-800);color:#fff">800</div><div style="background:var(--neutral-900);color:#fff">900</div>
+</div>
+<p class="k" style="margin-top:10px">texto 900 forte / 700 corpo / 500 secundário · borda 200 sutil / 300 controle · fundo alternado 50</p>
+<h3>Semânticas</h3>
+<div class="grid2" style="grid-template-columns:repeat(4,1fr)">
+<div class="tile" style="background:var(--success-50);color:var(--success-700);border-color:transparent"><strong style="font:var(--type-label)">Entregue</strong><div class="k" style="color:var(--success-700);opacity:.8">success</div></div>
+<div class="tile" style="background:var(--warning-50);color:var(--warning-700);border-color:transparent"><strong style="font:var(--type-label)">Em vistoria</strong><div class="k" style="color:var(--warning-700);opacity:.8">warning</div></div>
+<div class="tile" style="background:var(--danger-50);color:var(--danger-700);border-color:transparent"><strong style="font:var(--type-label)">Atrasado</strong><div class="k" style="color:var(--danger-700);opacity:.8">danger</div></div>
+<div class="tile" style="background:var(--info-50);color:var(--info-700);border-color:transparent"><strong style="font:var(--type-label)">Judicial</strong><div class="k" style="color:var(--info-700);opacity:.8">info</div></div>
+</div>
+<h3>As três superfícies permitidas</h3>
+<div class="grid3">
+<div class="tile" style="background:var(--surface-page)"><div style="font:var(--type-h4)">Branco</div><p class="k" style="margin:6px 0 0">--surface-page · fundo padrão</p></div>
+<div class="tile" style="background:var(--surface-subtle)"><div style="font:var(--type-h4)">Cinza-claro</div><p class="k" style="margin:6px 0 0">--surface-subtle · seção alternada</p></div>
+<div class="tile" style="background:var(--surface-contrast);border-color:var(--sage-200)"><div style="font:var(--type-h4);color:var(--sage-800)">Verde-claro</div><p class="k" style="margin:6px 0 0;color:var(--sage-600)">--surface-contrast · destaque</p></div>
+</div>
+<p style="margin-top:var(--space-5)"><strong>Contraste:</strong> o verde 500 sobre branco não atinge AA para texto pequeno. Texto verde usa sempre o 700; o 500 fica para fundo de botão (com texto branco), ícones e elementos gráficos.</p>
+</section>
 
-  <section>
-    <h2>Fundamentos</h2>
-    <p class="sub">Verde sage <code>#73945F</code> e cinza <code>#C8CBC6</code> foram extraídos do logo. Todo o resto deriva deles.</p>
-    <div class="ramp">
-      <div style="background:var(--sage-50)"></div>
-      <div style="background:var(--sage-100)"></div>
-      <div style="background:var(--sage-200)"></div>
-      <div style="background:var(--sage-300)"></div>
-      <div style="background:var(--sage-400)"></div>
-      <div style="background:var(--sage-500)"></div>
-      <div style="background:var(--sage-600)"></div>
-      <div style="background:var(--sage-700)"></div>
-      <div style="background:var(--sage-800)"></div>
-      <div style="background:var(--sage-900)"></div>
-    </div>
-    <div class="stats">
-      <div class="stat"><span class="n">169</span><span class="l">design tokens em CSS</span></div>
-      <div class="stat"><span class="n">29</span><span class="l">componentes primitivos</span></div>
-      <div class="stat"><span class="n">3</span><span class="l">produtos cobertos</span></div>
-      <div class="stat"><span class="n">Jost</span><span class="l">+ Manrope + JetBrains Mono</span></div>
-    </div>
-  </section>
+<section id="tipografia">
+<span class="eyebrow">Fundamentos</span><h2>Tipografia</h2>
+<p class="lead">Jost para títulos, Manrope para leitura e interface, JetBrains Mono para dados técnicos.</p>
+<div style="display:grid;gap:var(--space-6)">
+<div class="tile"><span class="k">Jost 300 · --type-h1 · 3rem/1.15 · tracking -0.015em</span><div style="font:var(--type-h1);margin-top:8px">Laudo de Avaliação de Imóvel</div></div>
+<div class="tile"><span class="k">Manrope 400 · --type-body-lg · 1.125rem/1.65</span><p style="font:var(--type-body-lg);margin:8px 0 0;max-width:60ch">Descubra o valor do seu imóvel com a visão completa de arquitetos, engenheiros e corretores.</p></div>
+<div class="tile"><span class="k">JetBrains Mono 400 · --type-mono · 0.875rem</span><div style="font:var(--type-mono);line-height:1.9;margin-top:8px">CNPJ 39.819.814/0001-98<br>CAU PJ69468-1 · CRECI 11689-J<br>NBR 14653 · R$ 1.700,00</div></div>
+</div>
+<h3>Escala</h3>
+<div class="wrapt"><table class="spec">
+<thead><tr><th>Token</th><th>Tamanho</th><th>Uso</th><th style="text-align:right">Amostra</th></tr></thead>
+<tbody>
+<tr><td><code>--text-6xl</code></td><td>3.75rem</td><td>Display de hero</td><td style="text-align:right;font-family:var(--font-display);font-weight:300;font-size:2rem">Valen</td></tr>
+<tr><td><code>--text-5xl</code></td><td>3rem</td><td>H1 de página</td><td style="text-align:right;font-family:var(--font-display);font-weight:300;font-size:1.75rem">Valen</td></tr>
+<tr><td><code>--text-4xl</code></td><td>2.25rem</td><td>H2 de seção</td><td style="text-align:right;font-family:var(--font-display);font-weight:300;font-size:1.5rem">Valen</td></tr>
+<tr><td><code>--text-2xl</code></td><td>1.5rem</td><td>H3, título de painel</td><td style="text-align:right;font-family:var(--font-display);font-weight:400;font-size:1.25rem">Valen</td></tr>
+<tr><td><code>--text-xl</code></td><td>1.25rem</td><td>H4, título de card</td><td style="text-align:right;font-family:var(--font-sans);font-weight:500;font-size:1.125rem">Valen</td></tr>
+<tr><td><code>--text-base</code></td><td>1rem</td><td>Corpo</td><td style="text-align:right;font-family:var(--font-sans);font-size:1rem">Valen</td></tr>
+<tr><td><code>--text-sm</code></td><td>0.875rem</td><td>Interface, rótulos, tabela</td><td style="text-align:right;font-family:var(--font-sans);font-size:.875rem">Valen</td></tr>
+<tr><td><code>--text-xs</code></td><td>0.75rem</td><td>Eyebrow em caixa alta</td><td style="text-align:right;font-family:var(--font-sans);font-size:.75rem;text-transform:uppercase;letter-spacing:.18em">Valen</td></tr>
+</tbody></table></div>
+</section>
 
-  <section>
-    <h2>Para desenvolvedores</h2>
-    <p class="sub">Base técnica Tailwind + shadcn/ui, ícones Lucide. O contrato de variáveis é canônico do shadcn — só os valores mudam.</p>
-    <div class="grid">
-      <a class="card" href="https://github.com/valenbrasil/design/blob/main/README.md">
-        <h3>Guia completo</h3>
-        <p>Marca, tom de voz, fundamentos, componentes e regras não negociáveis.</p>
-        <span class="go">Ler →</span>
-      </a>
-      <a class="card" href="https://github.com/valenbrasil/design/tree/main/handoff">
-        <h3>Handoff</h3>
-        <p><code>globals.css</code> e instruções para iniciar um projeto Next.js.</p>
-        <span class="go">Ver →</span>
-      </a>
-      <a class="card" href="https://github.com/valenbrasil/design/tree/main/components">
-        <h3>Componentes</h3>
-        <p>Cada primitiva com <code>.jsx</code>, contrato de props em <code>.d.ts</code> e spec em <code>.prompt.md</code>.</p>
-        <span class="go">Ver →</span>
-      </a>
-    </div>
-    <p class="note" style="margin-top:var(--space-8)"><strong>O sistema é exclusivamente claro.</strong> Não existe tema escuro nem seção de fundo escuro em nenhum produto. Para destacar, use o verde-claro <code>--surface-contrast</code> com texto <code>--sage-800</code>.</p>
-  </section>
+<section id="espaco">
+<span class="eyebrow">Fundamentos</span><h2>Espaçamento e grid</h2>
+<p class="lead">Escala Tailwind: 1 unidade = 0,25rem. Container de 1200px, gutter de 1,5rem, seções verticais de 6rem.</p>
+<div style="display:flex;align-items:flex-end;gap:18px;padding:var(--space-5) 0">
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:.25rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">1</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:.5rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">2</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:.75rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">3</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:1rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">4</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:1.5rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">6</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:2rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">8</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:3rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">12</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:4rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">16</span></div>
+<div style="display:grid;justify-items:center;gap:6px"><div style="width:6rem;height:24px;background:var(--sage-300);border-radius:2px"></div><span class="k">24</span></div>
+</div>
+<div class="wrapt"><table class="spec">
+<thead><tr><th>Token</th><th>Valor</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td><code>--container-max</code></td><td>1200px</td><td>Largura do site e do dashboard</td></tr>
+<tr><td><code>--container-narrow</code></td><td>720px</td><td>Coluna de leitura</td></tr>
+<tr><td><code>--gutter</code></td><td>1.5rem</td><td>Respiro lateral</td></tr>
+<tr><td><code>--section-y</code></td><td>6rem</td><td>Respiro vertical entre seções</td></tr>
+<tr><td><code>--control-h-sm/md/lg</code></td><td>2 / 2.5 / 3rem</td><td>Altura de botões e campos</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="forma">
+<span class="eyebrow">Fundamentos</span><h2>Forma, sombra e movimento</h2>
+<h3>Raios</h3>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="width:110px;height:76px;background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--radius-sm);display:grid;place-items:end center;padding-bottom:6px"><span class="k">sm 6px</span></div>
+<div style="width:110px;height:76px;background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--radius-control);display:grid;place-items:end center;padding-bottom:6px"><span class="k">controle 8px</span></div>
+<div style="width:110px;height:76px;background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--radius-card);display:grid;place-items:end center;padding-bottom:6px"><span class="k">card 12px</span></div>
+<div style="width:110px;height:76px;background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--radius-xl);display:grid;place-items:end center;padding-bottom:6px"><span class="k">modal 16px</span></div>
+<div style="width:110px;height:76px;background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--radius-2xl);display:grid;place-items:end center;padding-bottom:6px"><span class="k">imagem 20px</span></div>
+<div style="width:110px;height:76px;background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--radius-pill);display:grid;place-items:end center;padding-bottom:6px"><span class="k">pilula</span></div>
+</div>
+<h3>Elevação</h3>
+<div style="display:flex;gap:24px;flex-wrap:wrap;padding:12px 4px">
+<div style="width:112px;height:80px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-card);box-shadow:var(--shadow-xs);display:grid;place-items:end center;padding-bottom:6px"><span class="k">xs repouso</span></div>
+<div style="width:112px;height:80px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-card);box-shadow:var(--shadow-sm);display:grid;place-items:end center;padding-bottom:6px"><span class="k">sm</span></div>
+<div style="width:112px;height:80px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-card);box-shadow:var(--shadow-md);display:grid;place-items:end center;padding-bottom:6px"><span class="k">md hover</span></div>
+<div style="width:112px;height:80px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);display:grid;place-items:end center;padding-bottom:6px"><span class="k">lg toast</span></div>
+<div style="width:112px;height:80px;background:var(--surface-card);border:1px solid var(--border-subtle);border-radius:var(--radius-card);box-shadow:var(--shadow-xl);display:grid;place-items:end center;padding-bottom:6px"><span class="k">xl modal</span></div>
+</div>
+<h3>Movimento e estados</h3>
+<div class="wrapt"><table class="spec">
+<thead><tr><th>Situação</th><th>Duração</th><th>Comportamento</th></tr></thead>
+<tbody>
+<tr><td>Cor de controle</td><td>120ms</td><td>Botão sólido escurece um passo (500 → 600)</td></tr>
+<tr><td>Hover / toggle</td><td>200ms</td><td>Card clicável sobe 2px e ganha sombra md</td></tr>
+<tr><td>Accordion, modal</td><td>320ms</td><td>“+” gira 45° para virar “×”</td></tr>
+<tr><td>Entrada de seção</td><td>600ms</td><td>Fade suave, sem deslocamento grande</td></tr>
+<tr><td>Press</td><td>120ms</td><td><code>scale(0.985)</code>, sem mudança de cor</td></tr>
+<tr><td>Foco</td><td>—</td><td>Borda <code>--ring</code> + anel de 3px a 28%</td></tr>
+<tr><td>Desabilitado</td><td>—</td><td><code>opacity: .45</code>, cursor not-allowed</td></tr>
+</tbody></table></div>
+<p class="k" style="margin-top:12px">Easing padrão <code>--ease-out</code> = cubic-bezier(.16,1,.3,1). Sem bounce, sem elástico, sem parallax.</p>
+</section>
+
+<section id="icones">
+<span class="eyebrow">Fundamentos</span><h2>Iconografia</h2>
+<p class="lead">Lucide, o set padrão do shadcn. Traço 2px, colorido por <code>currentColor</code>. Nunca cole SVG à mão; use o componente <code>Icon</code>.</p>
+<div id="spec-icons"></div>
+</section>
+
+<section id="c-core"><span class="eyebrow">Componentes</span><h2>Core</h2><p class="lead">Button, IconButton, Badge, Tag, Card, Separator, Avatar, StatCard.</p><div id="spec-buttons"></div><div id="spec-data"></div></section>
+<section id="c-forms"><span class="eyebrow">Componentes</span><h2>Formulários</h2><p class="lead">Rótulo sempre acima do campo — nunca placeholder no lugar de rótulo.</p><div id="spec-forms"></div></section>
+<section id="c-feedback"><span class="eyebrow">Componentes</span><h2>Feedback</h2><p class="lead">Aviso inline, notificação, progresso e modal. Fundo tonal, nunca borda colorida à esquerda.</p><div id="spec-feedback"></div></section>
+<section id="c-nav"><span class="eyebrow">Componentes</span><h2>Navegação</h2><p class="lead">Abas, trilha, paginação e item de sidebar.</p><div id="spec-nav"></div></section>
+<section id="c-data"><span class="eyebrow">Componentes</span><h2>Dados</h2><p class="lead">Tabela e accordion.</p><div id="spec-table"></div></section>
+
+<section id="tela-site">
+<span class="eyebrow">Produtos</span><h2>Website institucional</h2>
+<p class="lead">valenbrasil.com — hero, garantias, tipos de avaliação, aplicações, processo, equipe, história, blog, FAQ e chamada final.</p>
+<div class="frame"><iframe src="ui_kits/website/index.html" width="1280" height="1050" style="transform:scale(.4)" title="Website"></iframe></div>
+<p style="margin-top:var(--space-4)"><a href="ui_kits/website/index.html">Abrir tela completa →</a></p>
+</section>
+
+<section id="tela-blog">
+<span class="eyebrow">Produtos</span><h2>Blog</h2>
+<p class="lead">blog.valenbrasil.com — feed com destaque, últimos artigos filtráveis, seções por tag e página de artigo.</p>
+<div class="frame"><iframe src="ui_kits/blog/index.html" width="1080" height="1050" style="transform:scale(.47)" title="Blog"></iframe></div>
+<p style="margin-top:var(--space-4)"><a href="ui_kits/blog/index.html">Abrir tela completa →</a></p>
+</section>
+
+<section id="tela-dash">
+<span class="eyebrow">Produtos</span><h2>Dashboard</h2>
+<p class="lead">Painel interno de gestão de laudos: visão geral, lista com filtros, detalhe do processo, agenda de vistorias e login.</p>
+<div class="frame"><iframe src="ui_kits/dashboard/index.html" width="1440" height="1180" style="transform:scale(.36)" title="Dashboard"></iframe></div>
+<p style="margin-top:var(--space-4)"><a href="ui_kits/dashboard/index.html">Abrir painel →</a> &nbsp;·&nbsp; <a href="ui_kits/dashboard/login.html">Abrir login →</a></p>
+</section>
+
+<section id="dev">
+<span class="eyebrow">Implementação</span><h2>Handoff para desenvolvedores</h2>
+<p class="lead">Next.js + Tailwind + shadcn/ui. O pacote completo está em <code>handoff/</code>.</p>
+<pre>pnpm dlx shadcn@latest init --preset b3acDp3htA --template next</pre>
+<p>Depois do init, substitua o <code>app/globals.css</code> gerado por <code>handoff/globals.css</code> — ele mantém todo o contrato de variáveis do shadcn e só troca os valores pelos da marca. Ícones: <code>pnpm add lucide-react</code>.</p>
+<h3>Regras não negociáveis</h3>
+<div>
+<div class="rule"><span class="num">01</span><p style="margin:0">Somente superfícies claras. Não crie <code>.dark</code>, não use neutral-900 como fundo de seção. Para destacar, <code>bg-sage-50</code> com texto <code>text-sage-800</code>.</p></div>
+<div class="rule"><span class="num">02</span><p style="margin:0">Verde é acento, não fundo: botão primário, ícones, links, badges, progresso, estado ativo de navegação.</p></div>
+<div class="rule"><span class="num">03</span><p style="margin:0">Máximo dois fundos por página, mais o verde-claro pontual.</p></div>
+<div class="rule"><span class="num">04</span><p style="margin:0">Cards: branco, borda 1px, raio 12px, sombra mínima. Sem gradiente, sem borda colorida só à esquerda.</p></div>
+<div class="rule"><span class="num">05</span><p style="margin:0">Sem emoji, sem ilustração vetorial desenhada à mão, sem imagem gerada.</p></div>
+<div class="rule"><span class="num">06</span><p style="margin:0">Logo sempre do arquivo original.</p></div>
+<div class="rule"><span class="num">07</span><p style="margin:0">Conteúdo em pt-BR, “nós” para a empresa e “você” para o cliente.</p></div>
+</div>
+<h3>Onde está cada coisa</h3>
+<div class="wrapt"><table class="spec">
+<thead><tr><th>Arquivo</th><th>Conteúdo</th></tr></thead>
+<tbody>
+<tr><td><code>styles.css</code></td><td>Ponto de entrada único; só <code>@import</code>s</td></tr>
+<tr><td><code>tokens/</code></td><td>colors, typography, spacing, radius, shadows, motion, fonts, base</td></tr>
+<tr><td><code>components/</code></td><td>27 primitivas — <code>.jsx</code> + <code>.d.ts</code> (contrato de props) + <code>.prompt.md</code></td></tr>
+<tr><td><code>ui_kits/</code></td><td>website, blog, dashboard (+ login) — HTMLs interativos</td></tr>
+<tr><td><code>handoff/</code></td><td><code>README.md</code> e <code>globals.css</code> prontos para o projeto Next</td></tr>
+<tr><td><code>readme.md</code></td><td>Guia completo: contexto, conteúdo, fundamentos, iconografia, índice</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="pendencias">
+<span class="eyebrow">Implementação</span><h2>Pendências conhecidas</h2>
+<div>
+<div class="rule"><span class="num">01</span><p style="margin:0"><strong>Fontes.</strong> Jost, Manrope e JetBrains Mono são aproximações do Google Fonts — os arquivos originais do site (Framer) não foram fornecidos. Com os WOFF2 reais, a troca é imediata em <code>tokens/fonts.css</code>.</p></div>
+<div class="rule"><span class="num">02</span><p style="margin:0"><strong>Preset shadcn <code>b3acDp3htA</code>.</strong> O ID não é resolvível publicamente; o sistema foi escrito contra o contrato canônico do shadcn. Comparar com o <code>globals.css</code> gerado no primeiro projeto real.</p></div>
+<div class="rule"><span class="num">03</span><p style="margin:0"><strong>Repositórios vazios.</strong> <code>valen-design</code> e <code>valen-blog</code> só têm README — nenhum valor foi derivado de código. Website e blog são reconstruções fiéis de conteúdo, não cópias pixel-perfect.</p></div>
+<div class="rule"><span class="num">04</span><p style="margin:0"><strong>Dashboard.</strong> Não existe produto correspondente hoje; o fluxo de gestão de laudos é composição original e precisa de validação da operação.</p></div>
+</div>
+</section>
 
 </main>
+</div>
+<script>
+const mounts = [["spec-buttons", window.SpecButtons], ["spec-data", window.SpecDataDisplay],
+  ["spec-forms", window.SpecForms], ["spec-feedback", window.SpecFeedback],
+  ["spec-nav", window.SpecNavigation], ["spec-table", window.SpecTable],
+  ["spec-icons", window.SpecIcons]];
+mounts.forEach(([id, C]) => {
+  const el = document.getElementById(id);
+  if (el && C) ReactDOM.createRoot(el).render(React.createElement(C));
+});
+</script>
 
-<footer>
-  <div class="wrap">
-    <div>
-      <div>Valen Brasil Gestão Empresarial Ltda</div>
-      <div class="mono">CNPJ 39.819.814/0001-98 · CAU PJ69468-1 · CRECI 11689-J</div>
-    </div>
-    <div>Itajaí · Santa Catarina</div>
-  </div>
-</footer>
-
-</body>
-</html>
+</body></html>
