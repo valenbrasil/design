@@ -3,11 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
+      # Só a main: o ambiente `github-pages`, criado quando o Pages é ativado
+      # com origem "GitHub Actions", aceita deploy apenas da branch padrão.
+      # Disparar a partir de outra branch é rejeitado antes de qualquer passo
+      # rodar, então não faz sentido escutar outras branches aqui.
       - main
-      # Publica também a partir da branch de trabalho, para que o site fique
-      # disponível antes do merge. Depois que o PR for integrado, esta linha
-      # pode sair e o deploy passa a acontecer só a partir da main.
-      - claude/design-system-github-u5p1m4
   workflow_dispatch:
 
 permissions:
