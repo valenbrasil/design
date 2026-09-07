@@ -39,13 +39,13 @@ no painel do GitLab e no DNS, não do código deste repositório:
 | Item | Estado | O que falta |
 |---|---|---|
 | Código nas duas plataformas | pronto | — |
-| CI do GitLab (`.gitlab-ci.yml`) | escrito e validado pelo linter do GitLab | verificação de identidade da conta em https://gitlab.com/-/identity_verification, sem a qual nenhum job roda |
-| Espelhamento GitLab → GitHub | **não configurado** | *Settings → Repository → Mirroring repositories*, direção **Push**, destino `https://github.com/valenbrasil/design.git`, autenticando com um token do GitHub |
-| Visibilidade do Pages | privado | *Settings → General → Visibility → Pages*, se o site deve ser público |
-| Domínio `design.valenbrasil.com` | **DNS inexistente** | cadastrar o domínio em *Settings → Pages → New Domain* e criar os dois registros que o GitLab indicar: um `CNAME` para `valenbrasil.gitlab.io` e um `TXT` de verificação |
+| CI do GitLab (`.gitlab-ci.yml`) | publicando | — |
+| Espelhamento GitLab → GitHub | ativo | — |
+| Visibilidade do Pages | público | — |
+| Domínio `design.valenbrasil.com` | DNS apontando e domínio verificado | o certificado HTTPS está sendo emitido automaticamente; enquanto não sair, o site responde em `http://`. Depois, definir *Primary domain* em *Settings → Pages* para consolidar o endereço |
 
-Enquanto o CI do GitLab estiver bloqueado, o site publicado é o do GitHub
-Pages, em https://valenbrasil.github.io/design/.
+O GitHub Pages continua publicando a mesma coisa em
+https://valenbrasil.github.io/design/, como contingência.
 
 ## Estrutura do repositório
 
