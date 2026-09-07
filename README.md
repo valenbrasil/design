@@ -66,6 +66,34 @@ de um rastreador que executa JavaScript vê-la. Não há `robots.txt` com
 `Disallow` de propósito: bloquear o rastreamento impediria o buscador de ler o
 `noindex`, que é justamente o que remove a página do índice.
 
+### Acesso ao site
+
+O site pede uma senha antes de mostrar o conteúdo (`guia/gate.js`, carregado
+por todas as páginas). Nos três kits em `ui_kits/` o script entra no template
+interno, não no `<head>` externo, porque o carregador substitui o documento
+inteiro ao rodar. O desbloqueio vale para a aba (`sessionStorage`), então não
+se digita a senha a cada página.
+
+**Isto não é proteção de conteúdo, e é importante não confundir.** O site é
+estático: o conteúdo inteiro chega ao navegador junto com a verificação, então
+quem abrir o código-fonte ou desligar o JavaScript vê tudo sem digitar nada.
+Serve para o endereço não ficar escancarado a quem tropeça nele — é uma porta
+fechada, não um cofre. Guardamos o SHA-256 da senha em vez do texto, o que
+evita entregá-la a quem abre o código-fonte por curiosidade, mas não muda nada
+quanto ao conteúdo.
+
+Se algum dia o material precisar de proteção real, os dois caminhos com
+autenticação no servidor são: restringir o Pages a membros do projeto
+(*Settings → General → Visibility → Pages*, trocar para `Only project
+members`), ou pôr o Cloudflare Access na frente do domínio — este último exige
+ligar o proxy do Cloudflare, que hoje está desligado por causa do certificado.
+
+Para trocar a senha, gere o hash e substitua `HASH_SENHA` em `guia/gate.js`:
+
+```
+echo -n "nova-senha" | sha256sum
+```
+
 ### Como funciona a cópia no GitHub
 
 Um *push mirror* configurado no GitLab (*Settings → Repository → Mirroring
