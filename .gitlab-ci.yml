@@ -1,0 +1,35 @@
+# Publica o guia no GitLab Pages.
+#
+# O site é estático e já está pronto no repositório — não há build. O trabalho
+# do job é só reunir os arquivos em public/, que é o diretório que o GitLab
+# Pages serve. O equivalente no GitHub é .github/workflows/pages.yml; manter
+# os dois permite publicar nas duas plataformas a partir do mesmo commit.
+#
+# URL resultante: https://<namespace>.gitlab.io/<projeto>/
+# Como todos os caminhos do site são relativos, servir sob um subcaminho
+# funciona sem ajuste.
+
+pages:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - mkdir -p public
+    # Cópia sem dependências (só o shell da imagem): copia cada entrada da raiz
+    # menos as que não pertencem ao site. public/ entra na exclusão para não ser
+    # copiado dentro de si mesmo.
+    - |
+      for entrada in * .[!.]*; do
+        case "$entrada" in
+          public|.git|.github|.gitlab-ci.yml|.claude) continue ;;
+        esac
+        [ -e "$entrada" ] || continue
+        cp -r "$entrada" public/
+      done
+    # Falha cedo e com mensagem clara se a página principal não chegou.
+    - test -f public/index.html || { echo "index.html ausente em public/"; exit 1; }
+    - echo "publicando $(find public -type f | wc -l) arquivos"
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
