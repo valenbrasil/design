@@ -15,11 +15,47 @@ Santa Catarina, desde 2020. Equipe de arquitetos, engenheiros e corretores.
 | **Base técnica** | Tailwind + shadcn/ui. Contrato canônico de variáveis, escala de espaçamento Tailwind, ícones Lucide. |
 | **Regra número 1** | O sistema é **exclusivamente claro**. Não existe tema escuro nem seção de fundo escuro em nenhum produto. |
 
+## Onde o projeto vive e como publica
+
+**O GitLab é a origem.** Todo trabalho é commitado e empurrado para lá; o
+GitHub existe apenas como cópia de segurança, alimentada automaticamente.
+
+| | |
+|---|---|
+| **Origem** | https://gitlab.com/valenbrasil/design — é para cá que se empurra |
+| **Backup** | https://github.com/valenbrasil/design — espelho, não se edita direto |
+| **Site** | design.valenbrasil.com |
+
+O site é estático: não há build, os arquivos do repositório já são o site. O
+`.gitlab-ci.yml` reúne tudo em `public/` a cada push na branch padrão e o
+GitLab Pages serve esse diretório. O `.github/workflows/pages.yml` faz o
+equivalente no GitHub e serve de contingência enquanto a origem não publica.
+
+### Estado da configuração
+
+O desenho acima é o alvo. Nem tudo está ligado — o que falta depende de ações
+no painel do GitLab e no DNS, não do código deste repositório:
+
+| Item | Estado | O que falta |
+|---|---|---|
+| Código nas duas plataformas | pronto | — |
+| CI do GitLab (`.gitlab-ci.yml`) | escrito e validado pelo linter do GitLab | verificação de identidade da conta em https://gitlab.com/-/identity_verification, sem a qual nenhum job roda |
+| Espelhamento GitLab → GitHub | **não configurado** | *Settings → Repository → Mirroring repositories*, direção **Push**, destino `https://github.com/valenbrasil/design.git`, autenticando com um token do GitHub |
+| Visibilidade do Pages | privado | *Settings → General → Visibility → Pages*, se o site deve ser público |
+| Domínio `design.valenbrasil.com` | **DNS inexistente** | cadastrar o domínio em *Settings → Pages → New Domain* e criar os dois registros que o GitLab indicar: um `CNAME` para `valenbrasil.gitlab.io` e um `TXT` de verificação |
+
+Enquanto o CI do GitLab estiver bloqueado, o site publicado é o do GitHub
+Pages, em https://valenbrasil.github.io/design/.
+
 ## Estrutura do repositório
 
 ```
-readme.md              este arquivo — guia completo
+README.md               este arquivo — guia completo
+index.html              o guia publicado: página única com todos os componentes
 styles.css              ponto de entrada único; só @imports
+guia/                   react.min.js, react-dom.min.js, ds-bundle.js — o que a página do guia carrega
+.gitlab-ci.yml          publicação no GitLab Pages (origem)
+.github/workflows/      publicação no GitHub Pages (backup)
 tokens/                 colors, typography, spacing, radius, shadows, motion, fonts, base
 components/             29 primitivas — .jsx + .d.ts (contrato de props) + .prompt.md
   core/                 Avatar, Badge, Button, Card, Icon, IconButton, Logo, Separator, Tag
@@ -32,6 +68,7 @@ ui_kits/                website, blog, dashboard (+ login) — HTMLs interativos
   blog/                 BlogChrome.jsx, BlogFeed.jsx, PostView.jsx, index.html
   dashboard/            DashShell.jsx, DashOverview.jsx, DashLaudos.jsx, DashNova.jsx, Login.jsx, index.html, login.html
 assets/                 valen-logo.png, valen-icone.png
+  icons/                os 46 ícones Lucide usados pelo sistema, sem CDN externo
 handoff/                README.md e globals.css prontos para o projeto Next
 ```
 
@@ -39,12 +76,15 @@ Tabela de referência rápida ("onde está cada coisa"):
 
 | Arquivo | Conteúdo |
 |---|---|
+| `index.html` | O guia publicado — página única, com os componentes renderizados ao vivo |
 | `styles.css` | Ponto de entrada único; só `@import`s |
 | `tokens/` | colors, typography, spacing, radius, shadows, motion, fonts, base |
 | `components/` | 29 primitivas — `.jsx` + `.d.ts` (contrato de props) + `.prompt.md` |
 | `ui_kits/` | website, blog, dashboard (+ login) — HTMLs interativos |
+| `assets/` | Logo, selo e os 46 ícones Lucide usados pelo sistema |
+| `guia/` | React e o bundle de componentes que a página do guia carrega |
 | `handoff/` | `README.md` e `globals.css` prontos para o projeto Next |
-| `readme.md` | Guia completo: contexto, conteúdo, fundamentos, iconografia, índice |
+| `README.md` | Guia completo: contexto, conteúdo, fundamentos, iconografia, índice |
 
 ## Marca
 
