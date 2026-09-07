@@ -17,35 +17,85 @@ Santa Catarina, desde 2020. Equipe de arquitetos, engenheiros e corretores.
 
 ## Onde o projeto vive e como publica
 
-**O GitLab é a origem.** Todo trabalho é commitado e empurrado para lá; o
-GitHub existe apenas como cópia de segurança, alimentada automaticamente.
+**O GitLab é a origem.** Todo trabalho é commitado e empurrado para lá. Dali
+saem duas coisas automaticamente: o site publicado e uma cópia de segurança no
+GitHub. Ninguém empurra para o GitHub diretamente.
+
+```
+    você  ──push──►  GitLab  ──CI──►  https://design.valenbrasil.com
+                       │
+                       └──espelho──►  GitHub (cópia de segurança)
+```
 
 | | |
 |---|---|
-| **Origem** | https://gitlab.com/valenbrasil/design — é para cá que se empurra |
+| **Origem** | https://gitlab.com/valenbrasil/design |
+| **Site** | https://design.valenbrasil.com |
 | **Backup** | https://github.com/valenbrasil/design — espelho, não se edita direto |
-| **Site** | design.valenbrasil.com |
 
-O site é estático: não há build, os arquivos do repositório já são o site. O
-`.gitlab-ci.yml` reúne tudo em `public/` a cada push na branch padrão e o
-GitLab Pages serve esse diretório. O `.github/workflows/pages.yml` faz o
-equivalente no GitHub e serve de contingência enquanto a origem não publica.
+### Como o site é publicado
+
+O site é estático: não há build nem framework, os arquivos do repositório já
+são o site. A cada push na branch padrão, o `.gitlab-ci.yml` roda um job que
+copia tudo para `public/` — exceto `.git`, `.github`, `.gitlab-ci.yml` e
+`.claude` — e o GitLab Pages serve esse diretório. O job leva cerca de 12
+segundos e falha explicitamente se o `index.html` não chegar.
+
+O endereço final é `https://design.valenbrasil.com`, definido como *primary
+domain*: quem entrar pelo endereço interno do GitLab
+(`valenbrasil.gitlab.io/design`) é redirecionado para ele, então há um
+endereço só, e *Force HTTPS* garante o cadeado em todo acesso. O certificado é
+da Let's Encrypt, emitido e renovado automaticamente pelo GitLab.
+
+No DNS (gerenciado no Cloudflare) existe um único registro para isso:
+
+| Tipo | Nome | Valor | Proxy |
+|---|---|---|---|
+| `CNAME` | `design` | `valenbrasil.gitlab.io` | **DNS only** |
+
+O proxy do Cloudflare precisa ficar desligado (nuvem cinza). Ligado, o GitLab
+não consegue emitir o certificado e o acesso pode entrar em laço de
+redirecionamento.
+
+As páginas trazem `<meta name="robots" content="noindex, nofollow,
+noarchive">`: o guia é material interno e não deve aparecer em buscadores. Os
+três kits em `ui_kits/` carregam a meta duas vezes — no `<head>` externo e
+dentro do template que o carregador injeta —, porque eles substituem o
+documento inteiro ao rodar e uma tag só no head externo seria descartada antes
+de um rastreador que executa JavaScript vê-la. Não há `robots.txt` com
+`Disallow` de propósito: bloquear o rastreamento impediria o buscador de ler o
+`noindex`, que é justamente o que remove a página do índice.
+
+### Como funciona a cópia no GitHub
+
+Um *push mirror* configurado no GitLab (*Settings → Repository → Mirroring
+repositories*) replica a branch padrão para o GitHub a cada push, autenticando
+com um token de acesso do GitHub.
+
+Duas coisas a saber no dia a dia:
+
+- O GitLab limita a sincronização a uma a cada ~5 minutos. Dois pushes
+  seguidos podem levar alguns minutos para aparecer no GitHub — é limite de
+  frequência, não erro.
+- Como o GitHub é atualizado pelo espelho e não por você, um clone local pode
+  achar que há commits pendentes até rodar `git fetch`. Não há.
+
+O `.github/workflows/pages.yml` continua no repositório e publica a mesma
+coisa em https://valenbrasil.github.io/design/, servindo de contingência caso
+o GitLab fique indisponível.
 
 ### Estado da configuração
 
-O desenho acima é o alvo. Nem tudo está ligado — o que falta depende de ações
-no painel do GitLab e no DNS, não do código deste repositório:
+Tudo abaixo está ativo e verificado:
 
-| Item | Estado | O que falta |
-|---|---|---|
-| Código nas duas plataformas | pronto | — |
-| CI do GitLab (`.gitlab-ci.yml`) | publicando | — |
-| Espelhamento GitLab → GitHub | ativo | — |
-| Visibilidade do Pages | público | — |
-| Domínio `design.valenbrasil.com` | DNS apontando e domínio verificado | o certificado HTTPS está sendo emitido automaticamente; enquanto não sair, o site responde em `http://`. Depois, definir *Primary domain* em *Settings → Pages* para consolidar o endereço |
-
-O GitHub Pages continua publicando a mesma coisa em
-https://valenbrasil.github.io/design/, como contingência.
+| Item | Estado |
+|---|---|
+| CI do GitLab publicando | ativo |
+| Domínio `design.valenbrasil.com` | verificado, com certificado emitido |
+| *Primary domain* + *Force HTTPS* | ativos |
+| Visibilidade do Pages | público |
+| `noindex` nas cinco páginas | ativo |
+| Espelhamento GitLab → GitHub | ativo |
 
 ## Estrutura do repositório
 
