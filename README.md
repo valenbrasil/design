@@ -131,7 +131,7 @@ Tudo abaixo está ativo e verificado:
 README.md               este arquivo — guia completo
 index.html              o guia publicado: página única com todos os componentes
 styles.css              ponto de entrada único; só @imports
-guia/                   react.min.js, react-dom.min.js, ds-bundle.js — o que a página do guia carrega
+guia/                   react.min.js, react-dom.min.js, ds-bundle.js, gate.js — o que as páginas carregam
 .gitlab-ci.yml          publicação no GitLab Pages (origem)
 .github/workflows/      publicação no GitHub Pages (backup)
 tokens/                 colors, typography, spacing, radius, shadows, motion, fonts, base
@@ -146,7 +146,7 @@ ui_kits/                website, blog, dashboard (+ login) — HTMLs interativos
   blog/                 BlogChrome.jsx, BlogFeed.jsx, PostView.jsx, index.html
   dashboard/            DashShell.jsx, DashOverview.jsx, DashLaudos.jsx, DashNova.jsx, Login.jsx, index.html, login.html
 assets/                 valen-logo.png, valen-icone.png
-  icons/                os 46 ícones Lucide usados pelo sistema, sem CDN externo
+  icons/                os 49 ícones Lucide usados pelo sistema, sem CDN externo
 handoff/                README.md e globals.css prontos para o projeto Next
 ```
 
@@ -159,8 +159,8 @@ Tabela de referência rápida ("onde está cada coisa"):
 | `tokens/` | colors, typography, spacing, radius, shadows, motion, fonts, base |
 | `components/` | 29 primitivas — `.jsx` + `.d.ts` (contrato de props) + `.prompt.md` |
 | `ui_kits/` | website, blog, dashboard (+ login) — HTMLs interativos |
-| `assets/` | Logo, selo e os 46 ícones Lucide usados pelo sistema |
-| `guia/` | React e o bundle de componentes que a página do guia carrega |
+| `assets/` | Logo, selo e os 49 ícones Lucide usados pelo sistema |
+| `guia/` | React, o bundle de componentes e a tela de senha |
 | `handoff/` | `README.md` e `globals.css` prontos para o projeto Next |
 | `README.md` | Guia completo: contexto, conteúdo, fundamentos, iconografia, índice |
 
@@ -226,7 +226,8 @@ Todo o resto deriva deles. Valores completos em `tokens/colors.css`.
 |---|---|---|---|---|---|---|---|---|---|
 | `#f4f7f1` | `#e7ede2` | `#cfdcc6` | `#b2c6a4` | `#93ae81` | `#73945f` | `#5e7c4c` | `#4a633c` | `#3a4e30` | `#2c3a25` |
 
-`--primary` = 500 · hover = 600 · texto verde = 700 · fundo de destaque = 50.
+`--primary` = 500 · hover = 600 · texto verde = 600 (`--text-brand`) · fundo
+de destaque = 50.
 
 **Neutros** (`--neutral-0` a `--neutral-950`), cinza levemente esverdeado:
 
@@ -245,9 +246,12 @@ Texto 900 forte / 700 corpo / 500 secundário · borda 200 sutil / 300 controle
 cinza-claro (`--surface-subtle`, seção alternada) e verde-claro
 (`--surface-contrast`, destaque pontual).
 
-> **Contraste:** o verde 500 sobre branco não atinge AA para texto pequeno.
-> Texto verde usa sempre o 700; o 500 fica para fundo de botão (com texto
-> branco), ícones e elementos gráficos.
+> **Contraste sobre branco:** 500 = 3,43:1 (reprova AA para texto pequeno),
+> 600 = 4,70:1 (passa), 700 = 6,69:1 (folgado). Por isso `--text-brand` é o
+> **600**: é o tom mais claro que ainda passa. Use o 700 quando quiser mais
+> margem — texto pequeno sobre fundo tonal, por exemplo. O 500 fica para fundo
+> de botão (com texto branco), ícones e elementos gráficos, nunca para texto
+> sobre branco.
 
 ### Tipografia
 
@@ -316,7 +320,7 @@ Nunca cole SVG à mão; use sempre o componente `Icon`
 `.d.ts` (contrato de props) e `.prompt.md` (spec curta em pt-BR para uso por
 agentes de IA).
 
-**Core** — Button, IconButton, Badge, Tag, Card, Separator, Avatar, Logo.
+**Core** — Button, IconButton, Icon, Badge, Tag, Card, Separator, Avatar, Logo.
 
 | Componente | Descrição |
 |---|---|

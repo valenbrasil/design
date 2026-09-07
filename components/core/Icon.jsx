@@ -1,5 +1,9 @@
 import * as React from "react";
-const BASE = "assets/icons/";
+// Os SVGs vivem em assets/icons/, na raiz do site. Páginas servidas de um
+// nível mais fundo definem window.__VALEN_ICON_BASE antes de carregar o
+// componente para corrigir o caminho relativo.
+const BASE =
+  (typeof window !== "undefined" && window.__VALEN_ICON_BASE) || "assets/icons/";
 function Icon({ name, size = 20, style, className }) {
   const url = BASE + name + ".svg";
   return (

@@ -33,7 +33,7 @@ pnpm add lucide-react
 Os componentes deste pacote usam um componente `Icon` que resolve ícones do
 Lucide por nome (ex. `name="arrow-right"`). Na versão de referência
 (`components/core/Icon.jsx`), isso é feito via `mask-image` apontando para
-`assets/icons/`, que acompanha o repositório — são os 46 ícones efetivamente
+`assets/icons/`, que acompanha o repositório — são os 49 ícones efetivamente
 usados pelo sistema, extraídos do `lucide-static@0.428.0`. Nenhuma requisição
 de rede em tempo de execução. Páginas fora da raiz definem
 `window.__VALEN_ICON_BASE` antes de carregar o bundle para corrigir o caminho
