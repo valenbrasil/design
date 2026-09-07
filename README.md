@@ -429,14 +429,44 @@ só troca os valores pelos da marca. Ícones: `pnpm add lucide-react`.
 
 ## Pendências conhecidas
 
-1. **Fontes.** Jost, Manrope e JetBrains Mono são aproximações do Google
-   Fonts — os arquivos originais do site (Framer) não foram fornecidos. Com
-   os WOFF2 reais, a troca é imediata em `tokens/fonts.css`.
-2. **Preset shadcn `b3acDp3htA`.** O ID não é resolvível publicamente; o
-   sistema foi escrito contra o contrato canônico do shadcn. Comparar com o
-   `globals.css` gerado no primeiro projeto real.
-3. **Repositórios vazios.** `valen-design` e `valen-blog` só têm README —
-   nenhum valor foi derivado de código. Website e blog são reconstruções
-   fiéis de conteúdo, não cópias pixel-perfect.
-4. **Dashboard.** Não existe produto correspondente hoje; o fluxo de gestão
-   de laudos é composição original e precisa de validação da operação.
+Duas continuam abertas e dependem de material ou de pessoas de fora do
+repositório. As outras duas foram fechadas e ficam registradas para quem
+encontrar a versão antiga deste texto.
+
+### Abertas
+
+1. **Fontes.** Jost, Manrope e JetBrains Mono são aproximações servidas pelo
+   Google Fonts. Os arquivos originais do site (Framer) nunca foram
+   fornecidos, e `framerusercontent.com` não é alcançável de onde o sistema
+   foi montado.
+
+   Para fechar: abra valenbrasil.com no navegador, DevTools → Network →
+   filtro **Font**, recarregue e baixe os `.woff2` que aparecerem. Ponha-os em
+   `assets/fonts/` e troque o `@import` de `tokens/fonts.css` por blocos
+   `@font-face` apontando para eles. **Nenhum outro token muda** — os papéis
+   tipográficos em `tokens/typography.css` referenciam as famílias por nome.
+
+   Se as famílias reais forem outras (e não Jost/Manrope/JetBrains Mono),
+   ajuste também `--font-display`, `--font-sans` e `--font-mono` no mesmo
+   arquivo.
+
+2. **Dashboard.** Não existe produto correspondente hoje. O fluxo de gestão de
+   laudos é composição original: usa o vocabulário certo, mas nada nele foi
+   confirmado com quem executa o trabalho.
+
+   Para fechar: `handoff/VALIDACAO-DASHBOARD.md` traz o roteiro de perguntas,
+   tela por tela, para levar a quem conduz um laudo do pedido à entrega.
+
+### Fechadas
+
+3. **Preset shadcn `b3acDp3htA`** — *resolvida*. O ID não é resolvível
+   publicamente, o que deixava em aberto se o `globals.css` bateria com o que
+   o CLI do shadcn gera. Conferido: as 33 variáveis do contrato canônico estão
+   todas declaradas em `handoff/globals.css`, e não há bloco `.dark`. O que
+   sobra são variáveis próprias da marca, que não conflitam.
+
+4. **Website e blog são reconstruções** — *não é defeito, é escopo*. Os
+   repositórios de origem (`valen-design`, `valen-blog`) só tinham README, de
+   modo que nenhum valor foi derivado de código: as telas reproduzem o
+   conteúdo com fidelidade, não o pixel. Quem comparar com o site publicado
+   vai encontrar diferenças de layout, e isso é esperado.
