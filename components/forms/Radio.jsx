@@ -32,10 +32,6 @@ function Radio({
         return (
           <label
             key={opt.value}
-            onClick={() => {
-              if (value === undefined) setInternal(opt.value);
-              onChange && onChange(opt.value);
-            }}
             style={{
               display: "flex",
               alignItems: "flex-start",
@@ -43,7 +39,28 @@ function Radio({
               cursor: "pointer",
             }}
           >
+            {/* Controle nativo, visualmente oculto: é ele que carrega o
+                atributo name, faz o grupo ser submetido num <form> e agrupa
+                as opções para leitores de tela. O visual fica nos spans. */}
+            <input
+              type="radio"
+              name={name}
+              value={opt.value}
+              checked={on}
+              onChange={() => {
+                if (value === undefined) setInternal(opt.value);
+                onChange && onChange(opt.value);
+              }}
+              style={{
+                position: "absolute",
+                width: 1,
+                height: 1,
+                opacity: 0,
+                margin: 0,
+              }}
+            />
             <span
+              aria-hidden="true"
               style={{
                 width: 18,
                 height: 18,

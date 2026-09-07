@@ -103,10 +103,13 @@ function Button({
   };
   return (
     <Tag
-      href={href}
+      // Um <a> ignora o atributo disabled, então um botão-link desabilitado
+      // continuaria navegando: retiramos o href e barramos o clique.
+      href={href && !disabled ? href : undefined}
       type={href ? undefined : type}
       disabled={href ? undefined : disabled}
-      onClick={disabled ? undefined : onClick}
+      onClick={disabled ? (e) => e.preventDefault() : onClick}
+      aria-disabled={disabled ? true : undefined}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false);
